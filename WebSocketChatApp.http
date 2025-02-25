@@ -4,3 +4,12 @@ GET {{WebSocketChatApp_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+POST {{WebSocketChatApp_HostAddress}}/api/v1/user/
+Accept: application/json
+{
+  "Email": "thanhlanh",
+  "Password": "lanh123",
+  "FirstName": "Lanh",
+  "LastName": "Ne"
+}
+###
