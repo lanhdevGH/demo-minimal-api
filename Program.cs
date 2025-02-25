@@ -1,5 +1,8 @@
 using WebSocketChatApp.Configurations;
 using WebSocketChatApp.Controller.Endpoins.v1;
+using WebSocketChatApp.Infrastructures.EF;
+using WebSocketChatApp.Infrastructures.EF.Implements;
+using WebSocketChatApp.Middlewares;
 using WebSocketChatApp.Services;
 using WebSocketChatApp.Services.Implements;
 
@@ -17,6 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSignalR();
 builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
@@ -36,4 +40,6 @@ if (app.Environment.IsDevelopment())
 //app.MapGet("/hello", () => "Hello World!");
 app.UseHttpsRedirection();
 app.MapUserEndpoints();
+
+app.UseMiddleware<ExceptionMiddleware>();
 app.Run();
